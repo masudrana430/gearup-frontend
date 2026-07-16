@@ -18,8 +18,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  NODE_ENV: production
-  NEXT_PUBLIC_APP_URL: http://localhost:3000
+  NEXT_PUBLIC_APP_URL: https://gearup-frontend-jade.vercel.app
   BACKEND_API_URL: https://gear-up-backend-delta.vercel.app/api/v1
   AUTH_COOKIE_NAME: gearup_access_token
 
