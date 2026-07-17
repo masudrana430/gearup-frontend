@@ -8,28 +8,30 @@ export const apiEndpoints = {
   health: "/health",
 
   auth: {
+    register: "/auth/register",
     login: "/auth/login",
+    me: "/auth/me",
   },
 
   categories: {
     list: "/categories",
 
     byId: (id: string | number) =>
-      `/categories/${encodeSegment(id)}`,
+      `/categories/${encodeURIComponent(String(id))}`,
   },
 
   gear: {
     list: "/gear",
 
     byId: (id: string | number) =>
-      `/gear/${encodeSegment(id)}`,
+      `/gear/${encodeURIComponent(String(id))}`,
   },
 
   rentals: {
     list: "/rentals",
 
     byId: (id: string | number) =>
-      `/rentals/${encodeSegment(id)}`,
+      `/rentals/${encodeURIComponent(String(id))}`,
   },
 
   reviews: {

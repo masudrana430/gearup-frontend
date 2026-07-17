@@ -17,6 +17,8 @@ import {
 } from "@/components/ui/button";
 import { cn } from "@/lib/utils/cn";
 
+import { UserMenu } from "@/components/layout/user-menu";
+
 const navigationItems = [
   {
     label: "Home",
@@ -86,17 +88,7 @@ export function Navbar() {
           <div className="flex items-center gap-2">
             <ThemeToggle />
 
-            <Link
-              href="/login"
-              className={cn(
-                buttonVariants({
-                  variant: "ghost",
-                }),
-                "hidden rounded-full md:inline-flex",
-              )}
-            >
-              Sign in
-            </Link>
+            <UserMenu />
 
             <Link
               href="/gear"
