@@ -1,6 +1,4 @@
-function encodeSegment(
-  value: string | number,
-): string {
+function encodeSegment(value: string | number): string {
   return encodeURIComponent(String(value));
 }
 
@@ -16,22 +14,23 @@ export const apiEndpoints = {
   categories: {
     list: "/categories",
 
-    byId: (id: string | number) =>
-      `/categories/${encodeURIComponent(String(id))}`,
+    byId: (id: string | number) => `/categories/${encodeSegment(id)}`,
   },
 
   gear: {
     list: "/gear",
 
-    byId: (id: string | number) =>
-      `/gear/${encodeURIComponent(String(id))}`,
+    byId: (id: string | number) => `/gear/${encodeSegment(id)}`,
   },
 
   rentals: {
-    list: "/rentals",
+    create: "/rentals",
+    mine: "/rentals/my-rentals",
 
-    byId: (id: string | number) =>
-      `/rentals/${encodeURIComponent(String(id))}`,
+    byId: (id: string | number) => `/rentals/${encodeURIComponent(String(id))}`,
+
+    cancel: (id: string | number) =>
+      `/rentals/${encodeURIComponent(String(id))}/cancel`,
   },
 
   reviews: {
