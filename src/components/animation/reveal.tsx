@@ -3,47 +3,56 @@
 import {
   motion,
   type HTMLMotionProps,
-  useReducedMotion,
+  type Variants,
 } from "motion/react";
 
-interface RevealProps extends HTMLMotionProps<"div"> {
+import { cn } from "@/lib/utils/cn";
+
+interface RevealProps
+  extends Omit<HTMLMotionProps<"div">, "children"> {
+  children: React.ReactNode;
   delay?: number;
+  duration?: number;
   distance?: number;
-  once?: boolean;
+  blur?: number;
 }
 
 export function Reveal({
   children,
+  className,
   delay = 0,
-  distance = 28,
-  once = true,
+  duration = 0.65,
+  distance = 24,
+  blur = 8,
   ...props
 }: RevealProps) {
-  const prefersReducedMotion = useReducedMotion();
+  const variants: Variants = {
+    hidden: {
+      opacity: 0,
+      y: distance,
+      filter: `blur(${blur}px)`,
+    },
+
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+    },
+  };
 
   return (
     <motion.div
       {...props}
-      initial={
-        prefersReducedMotion
-          ? false
-          : {
-              opacity: 0,
-              y: distance,
-              filter: "blur(8px)",
-            }
-      }
-      whileInView={{
-        opacity: 1,
-        y: 0,
-        filter: "blur(0px)",
-      }}
+      className={cn(className)}
+      variants={variants}
+      initial="hidden"
+      whileInView="visible"
       viewport={{
-        once,
-        amount: 0.2,
+        once: true,
+        amount: 0.15,
       }}
       transition={{
-        duration: 0.7,
+        duration,
         delay,
         ease: [0.22, 1, 0.36, 1],
       }}
